@@ -1,0 +1,34 @@
+ClearScreen	MACRO
+		MOV AH,06H
+		MOV AL,00H
+		MOV BH,07H
+		MOV CX,0000H
+		MOV DX,184FH
+		INT 10H
+ENDM
+
+ClearRect	MACRO Top,Left,Bottom,Right,Color
+		MOV AH,06H
+		MOV AL,00H
+		MOV BH,Color
+		MOV CH,Top
+		MOV CL,Left
+		MOV DH,Bottom
+		MOV DL,Right
+		INT 10H
+ENDM
+
+SetCursor MACRO Row,Column
+		MOV AH,02H
+		MOV BH,00H
+		MOV DH,Row
+		MOV DL,Column
+		INT 10H
+ENDM
+
+PrintString MACRO	String
+		MOV AH,09H
+		MOV DX,OFFSET String
+		INT 21H
+ENDM
+
